@@ -31,20 +31,20 @@ Copy-UserInternationalSettingsToSystem -WelcomeScreen $True -NewUser $True
 # [代替案]　C:\Windows\Setup\Scripts\SetupComplete.cmdでタイムゾーンを変更する
 
 $scriptPath = "C:\Windows\Setup\Scripts\SetupComplete.cmd"
-$timezoneCommand = "`r`n" + "@echo off`r`n"
-$timezoneCommand += 'powershell.exe -ExecutionPolicy Bypass -Command "Set-TimeZone -Id ''Tokyo Standard Time''"'
+$timezoneCommand = 'powershell.exe -ExecutionPolicy Bypass -Command "Set-TimeZone -Id ''Tokyo Standard Time''"'
 
 # フォルダが存在しない場合は作成
 $folderPath = Split-Path $scriptPath
 if (!(Test-Path $folderPath)) {
-    New-Item -Path $folderPath -ItemType Directory -Force
+    New-Item -Path $folderPath -ItemType Directory -Force
 }
 
-# ファイルが存在するか確認し、内容を追記
-$timezoneCommand = 'powershell.exe -ExecutionPolicy Bypass -Command "Set-TimeZone -Id ''Tokyo Standard Time''"'
-
+# ファイルが存在しない場合は初期化
 if (!(Test-Path $scriptPath)) {
-    Add-Content -Path $scriptPath -Value "@echo off"
+    Set-Content -Path $scriptPath -Value "@echo off" -Encoding ASCII
 }
-Add-Content -Path $scriptPath -Value $timezoneCommand
-Add-Content -Path $scriptPath -Value $timezoneCommand -Encoding ASCII
+
+# タイムゾーン設定が未記載なら追記
+if (-not (Get-Content $scriptPath | Select-String "Set-TimeZone")) {
+    Add-Content -Path $scriptPath -Value "`r`n" + $timezoneCommand -Encoding ASCII
+}

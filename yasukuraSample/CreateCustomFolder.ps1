@@ -29,6 +29,7 @@ Copy-UserInternationalSettingsToSystem -WelcomeScreen $True -NewUser $True
 # タイムゾーンを日本標準時(東京)に設定 -> Sysprepでリセットされている可能性が高い
 # Set-TimeZone -Id "Tokyo Standard Time"
 # [代替案]　C:\Windows\Setup\Scripts\SetupComplete.cmdでタイムゾーンを変更する
-echo @echo off > C:\Windows\Setup\Scripts\SetupComplete.cmd
-echo powershell.exe -ExecutionPolicy Bypass -Command "Set-TimeZone -Id 'Tokyo Standard Time'" >> C:\Windows\Setup\Scripts\SetupComplete.cmd
-
+$scriptPath = "C:\Windows\Setup\Scripts\SetupComplete.cmd"
+New-Item -Path $scriptPath -ItemType File -Force
+Add-Content -Path $scriptPath -Value '@echo off'
+Add-Content -Path $scriptPath -Value 'powershell.exe -ExecutionPolicy Bypass -Command "Set-TimeZone -Id ''Tokyo Standard Time''"'

@@ -17,6 +17,9 @@ if (!(Test-Path -Path $targetPath)) {
 # 時刻・日付などの表示形式が言語リストに追従するよう設定
 Set-WinCultureFromLanguageListOptOut -OptOut $False
 
+# タイムゾーンを日本標準時(東京)に設定
+Set-TimeZone -Id "Tokyo Standard Time"
+
 # デフォルトの入力方法を日本語IMEに変更
 Set-WinDefaultInputMethodOverride -InputTip "0411:00000411"
 

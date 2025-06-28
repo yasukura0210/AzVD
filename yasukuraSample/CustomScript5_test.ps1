@@ -2,7 +2,7 @@
 # Azure Virtual Desktop カスタムイメージ用スクリプト: デフォルトユーザーのデスクトップにフォルダを作成
 # フォルダ名は必要に応じて変更してください
 $folderName = "CustomFolder01"                              # 作成するフォルダ名
-$defaultDesktop = "C:\Users\Public\Desktop"
+$defaultDesktop = "C:\Users\Default\Desktop"
 $targetPath   = Join-Path -Path $defaultDesktop -ChildPath $folderName
 
 $logPath = "C:\AVDSetup\log.txt"

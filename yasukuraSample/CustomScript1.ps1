@@ -5,6 +5,7 @@ $folderName = "CustomFolder01"                              # 作成するフォ
 $defaultDesktop = "C:\Users\Default\Desktop"
 $targetPath   = Join-Path -Path $defaultDesktop -ChildPath $folderName
 
+$logPath = "C:\AVDSetup\log.txt"
 if (!(Test-Path -Path "C:\AVDSetup")) {
     New-Item -ItemType Directory -Path "C:\AVDSetup" -Force | Out-Null
 }
@@ -14,13 +15,13 @@ try {
   if (!(Test-Path -Path $targetPath)) {
       New-Item -ItemType Directory -Path $targetPath -Force | Out-Null
       Write-Host "Folder '$folderName' created in Default user Desktop ($targetPath)."
-      Add-Content -Path "C:\AVDSetup\log.txt" -Value "[$(Get-Date)] Folder '$folderName' created."
+      Add-Content -Path $logPath -Value "[$(Get-Date)] Folder '$folderName' created."
   } else {
       Write-Host "Folder '$folderName' already exists at $targetPath."
-      Add-Content -Path "C:\AVDSetup\log.txt" -Value "[$(Get-Date)] Folder already exists."    
+      Add-Content -Path $logPath -Value "[$(Get-Date)] Folder already exists."    
   }
 } catch {
-    Add-Content -Path "C:\AVDSetup\log.txt" -Value "[$(Get-Date)] Error: $_"
+    Add-Content -Path $logPath -Value "[$(Get-Date)] Error: $_"
 }
 
 #### システム設定

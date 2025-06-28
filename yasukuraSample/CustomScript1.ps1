@@ -5,6 +5,10 @@ $folderName = "CustomFolder01"                              # 作成するフォ
 $defaultDesktop = "C:\Users\Default\Desktop"
 $targetPath   = Join-Path -Path $defaultDesktop -ChildPath $folderName
 
+if (!(Test-Path -Path "C:\AVDSetup")) {
+    New-Item -ItemType Directory -Path "C:\AVDSetup" -Force | Out-Null
+}
+
 # フォルダが存在しない場合に新規作成
 try {
   if (!(Test-Path -Path $targetPath)) {

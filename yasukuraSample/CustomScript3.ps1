@@ -1,5 +1,7 @@
-### カスタムフォルダ作成 
-# Azure Virtual Desktop カスタムイメージ用スクリプト: デフォルトユーザーのデスクトップにフォルダを作成
+##### カスタムフォルダ作成 #####
+# C:\Users\Default\Desktop」へのフォルダ作成 : 各ユーザーのデフォルトプロファイルとしてのデスクトップ
+# C:\Users\Public\Desktop」へのフォルダ作成 : パブリックデスクトップ（ここに作成したショートカットやフォルダはそのマシン上の全ユーザーのデスクトップに表示される）
+
 $folderName1 = "CustomFolder01"
 $folderName2 = "CustomFolder02"
 $defaultDesktop1 = "C:\Users\Default\Desktop"
@@ -12,38 +14,49 @@ if (!(Test-Path -Path "C:\AVDSetup")) {
     New-Item -ItemType Directory -Path "C:\AVDSetup" -Force | Out-Null
 }
 
-# フォルダが存在しない場合に新規作成 : folderName1
-Add-Content -Path $logPath -Value "[$(Get-Date)] Folder1 create start."
+# フォルダ作成 : folderName1
+Add-Content -Path $logPath -Value "[$(Get-Date)] Folder1 creation start."
+Add-Content -Path $logPath -Value "[$(Get-Date)] targetPath is ($targetPath1)."
+Add-Content -Path $logPath -Value "[$(Get-Date)] folderName is ($folderName1)."
 try {
   if (!(Test-Path -Path $targetPath1)) {
       New-Item -ItemType Directory -Path $targetPath1 -Force | Out-Null
       Write-Host "Folder '$folderName1' created in Default user Desktop ($targetPath1)."
       Add-Content -Path $logPath -Value "[$(Get-Date)] Folder '$folderName1' created."
   } else {
-      Write-Host "Folder '$folderName1' already exists at $targetPath1."
+      Write-Host "Folder '$folderName1' already exists."
       Add-Content -Path $logPath -Value "[$(Get-Date)] Folder already exists."    
   }
 } catch {
     Add-Content -Path $logPath -Value "[$(Get-Date)] Error: $_"
 }
-Add-Content -Path $logPath -Value "[$(Get-Date)] Folder1 create end.."
+Add-Content -Path $logPath -Value "[$(Get-Date)] Folder1 creation end."
+Add-Content -Path $logPath -Value "[$(Get-Date)] targetPath is ($targetPath1)."
+Add-Content -Path $logPath -Value "[$(Get-Date)] folderName is ($folderName1)."
 
-# フォルダが存在しない場合に新規作成 : folderName2
-Add-Content -Path $logPath -Value "[$(Get-Date)] Folder2 create start."
+# フォルダ作成 : folderName2
+Add-Content -Path $logPath -Value "[$(Get-Date)] Folder2 creation start."
+Add-Content -Path $logPath -Value "[$(Get-Date)] targetPath is ($targetPath2)."
+Add-Content -Path $logPath -Value "[$(Get-Date)] folderName is ($folderName2)."
+
 try {
   if (!(Test-Path -Path $targetPath2)) {
       New-Item -ItemType Directory -Path $targetPath2 -Force | Out-Null
       Write-Host "Folder '$folderName2' created in Default user Desktop ($targetPath2)."
       Add-Content -Path $logPath -Value "[$(Get-Date)] Folder '$folderName2' created."
   } else {
-      Write-Host "Folder '$folderName2' already exists at $targetPath2."
+      Write-Host "Folder '$folderName2' already exists."
       Add-Content -Path $logPath -Value "[$(Get-Date)] Folder already exists."    
   }
 } catch {
     Add-Content -Path $logPath -Value "[$(Get-Date)] Error: $_"
 }
-Add-Content -Path $logPath -Value "[$(Get-Date)] Folder2 create end.."
+Add-Content -Path $logPath -Value "[$(Get-Date)] Folder2 creation start."
+Add-Content -Path $logPath -Value "[$(Get-Date)] targetPath is ($targetPath2)."
+Add-Content -Path $logPath -Value "[$(Get-Date)] folderName is ($folderName2)."
 
+
+####### 以下はOS設定 #######
 #### システム設定
 # 時刻・日付などの表示形式が言語リストに追従するよう設定
 Set-WinCultureFromLanguageListOptOut -OptOut $False
@@ -57,5 +70,5 @@ Set-WinSystemLocale -SystemLocale ja-JP
 # ようこそ画面と新規ユーザーアカウントにも現在の国際設定をコピー
 Copy-UserInternationalSettingsToSystem -WelcomeScreen $True -NewUser $True
 
-# タイムゾーンを日本標準時(東京)に設定 -> Sysprepでリセットされている模様
+# タイムゾーンを日本標準時(東京)に設定 -> Sysprepでリセットされている模様なので無意味
 # Set-TimeZone -Id "Tokyo Standard Time"

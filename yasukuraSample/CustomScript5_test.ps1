@@ -63,4 +63,4 @@ Set-WinSystemLocale -SystemLocale ja-JP
 Copy-UserInternationalSettingsToSystem -WelcomeScreen $True -NewUser $True
 
 # タイムゾーンを日本標準時(東京)に設定 -> Sysprepでリセットされている可能性が高い
-Set-TimeZone -Id "Tokyo Standard Time"
+# Set-TimeZone -Id "Tokyo Standard Time"

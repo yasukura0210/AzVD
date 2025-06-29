@@ -57,4 +57,4 @@ try {
 } catch {
     Add-Content -Path $logPath -Value "[$(Get-Date)] Error: $_"
 }
-Add-Content -Path $logPath -Value "[$(Get-Date)] Folder2 creation end. TargetPath is ($targetPath2). FolderName is $folderName2."
+Add-Content -Path $logPath -Value "[$(Get-Date)] Folder2 creation end. TargetPath is $targetPath2. FolderName is $folderName2."

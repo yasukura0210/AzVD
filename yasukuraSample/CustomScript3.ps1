@@ -1,5 +1,4 @@
 ### カスタムフォルダ作成 
-
 # Azure Virtual Desktop カスタムイメージ用スクリプト: デフォルトユーザーのデスクトップにフォルダを作成
 $folderName1 = "CustomFolder01"
 $folderName2 = "CustomFolder02"
@@ -13,7 +12,7 @@ if (!(Test-Path -Path "C:\AVDSetup")) {
     New-Item -ItemType Directory -Path "C:\AVDSetup" -Force | Out-Null
 }
 
-# フォルダが存在しない場合に新規作成1
+# フォルダが存在しない場合に新規作成 1
 Add-Content -Path $logPath -Value "[$(Get-Date)] Folder1 create start."
 try {
   if (!(Test-Path -Path $targetPath1)) {
@@ -29,7 +28,7 @@ try {
 }
 Add-Content -Path $logPath -Value "[$(Get-Date)] Folder1 create end.."
 
-# フォルダが存在しない場合に新規作成2
+# フォルダが存在しない場合に新規作成 2
 Add-Content -Path $logPath -Value "[$(Get-Date)] Folder2 create start."
 try {
   if (!(Test-Path -Path $targetPath2)) {

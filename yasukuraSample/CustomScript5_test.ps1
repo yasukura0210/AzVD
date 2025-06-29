@@ -49,7 +49,6 @@ try {
 }
 
 
-
 #### システム設定
 # 時刻・日付などの表示形式が言語リストに追従するよう設定
 Set-WinCultureFromLanguageListOptOut -OptOut $False
@@ -58,3 +57,10 @@ Set-WinCultureFromLanguageListOptOut -OptOut $False
 Set-WinDefaultInputMethodOverride -InputTip "0411:00000411"
 
 # システムロケールを日本 (ja-JP) に設定
+Set-WinSystemLocale -SystemLocale ja-JP
+
+# ようこそ画面と新規ユーザーアカウントにも現在の国際設定をコピー
+Copy-UserInternationalSettingsToSystem -WelcomeScreen $True -NewUser $True
+
+# タイムゾーンを日本標準時(東京)に設定 -> Sysprepでリセットされている可能性が高い
+Set-TimeZone -Id "Tokyo Standard Time"

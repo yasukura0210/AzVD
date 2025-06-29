@@ -12,7 +12,7 @@ if (!(Test-Path -Path "C:\AVDSetup")) {
     New-Item -ItemType Directory -Path "C:\AVDSetup" -Force | Out-Null
 }
 
-# フォルダが存在しない場合に新規作成 1
+# フォルダが存在しない場合に新規作成 : folderName1
 Add-Content -Path $logPath -Value "[$(Get-Date)] Folder1 create start."
 try {
   if (!(Test-Path -Path $targetPath1)) {
@@ -28,7 +28,7 @@ try {
 }
 Add-Content -Path $logPath -Value "[$(Get-Date)] Folder1 create end.."
 
-# フォルダが存在しない場合に新規作成 2
+# フォルダが存在しない場合に新規作成 : folderName1
 Add-Content -Path $logPath -Value "[$(Get-Date)] Folder2 create start."
 try {
   if (!(Test-Path -Path $targetPath2)) {

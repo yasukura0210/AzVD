@@ -25,7 +25,6 @@ if (!(Test-Path -Path "C:\AVDSetup")) {
 }
 
 Add-Content -Path $logPath -Value "[$(Get-Date)] Folder1 create start. TargetPath is ($targetPath). FolderName is ($folderName)."
-# フォルダが存在しない場合に新規作成
 try {
   if (!(Test-Path -Path $targetPath)) {
       New-Item -ItemType Directory -Path $targetPath -Force | Out-Null
@@ -45,7 +44,6 @@ $defaultDesktop = "C:\Users\Public\Desktop"
 $targetPath   = $defaultDesktop + "\" + $folderName 
 
 Add-Content -Path $logPath -Value "[$(Get-Date)] Folder2 create start. TargetPath is ($targetPath). FolderName is ($folderName)."
-# フォルダが存在しない場合に新規作成
 try {
   if (!(Test-Path -Path $targetPath)) {
       New-Item -ItemType Directory -Path $targetPath -Force | Out-Null

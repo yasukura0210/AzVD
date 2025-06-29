@@ -28,7 +28,7 @@ try {
 }
 Add-Content -Path $logPath -Value "[$(Get-Date)] Folder1 create end.."
 
-# フォルダが存在しない場合に新規作成 : folderName1
+# フォルダが存在しない場合に新規作成 : folderName2
 Add-Content -Path $logPath -Value "[$(Get-Date)] Folder2 create start."
 try {
   if (!(Test-Path -Path $targetPath2)) {

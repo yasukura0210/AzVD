@@ -11,6 +11,10 @@ if (!(Test-Path -Path "C:\AVDSetup")) {
     New-Item -ItemType Directory -Path "C:\AVDSetup" -Force | Out-Null
 }
 
+Add-Content -Path $logPath -Value "[$(Get-Date)] Folder1 create start."
+Add-Content -Path $logPath -Value "[$(Get-Date)] targetPath is ($targetPath)."
+Add-Content -Path $logPath -Value "[$(Get-Date)] folderName is ($folderName)."
+
 # フォルダが存在しない場合に新規作成
 try {
   if (!(Test-Path -Path $targetPath)) {
@@ -24,15 +28,19 @@ try {
 } catch {
     Add-Content -Path $logPath -Value "[$(Get-Date)] Error: $_"
 }
+
+Add-Content -Path $logPath -Value "[$(Get-Date)] Folder1 create end."
+Add-Content -Path $logPath -Value "[$(Get-Date)] targetPath is ($targetPath)."
+Add-Content -Path $logPath -Value "[$(Get-Date)] folderName is ($folderName)."
+
 
 $folderName = "CustomFolder02"                              # 作成するフォルダ名
 $defaultDesktop = "C:\Users\Public\Desktop"
 $targetPath   = Join-Path -Path $defaultDesktop -ChildPath $folderName
 
-$logPath = "C:\AVDSetup\log.txt"
-if (!(Test-Path -Path "C:\AVDSetup")) {
-    New-Item -ItemType Directory -Path "C:\AVDSetup" -Force | Out-Null
-}
+Add-Content -Path $logPath -Value "[$(Get-Date)] Folder2 create start."
+Add-Content -Path $logPath -Value "[$(Get-Date)] targetPath is ($targetPath)."
+Add-Content -Path $logPath -Value "[$(Get-Date)] folderName is ($folderName)."
 
 # フォルダが存在しない場合に新規作成
 try {
@@ -47,6 +55,10 @@ try {
 } catch {
     Add-Content -Path $logPath -Value "[$(Get-Date)] Error: $_"
 }
+
+Add-Content -Path $logPath -Value "[$(Get-Date)] Folder2 create end."
+Add-Content -Path $logPath -Value "[$(Get-Date)] targetPath is ($targetPath)."
+Add-Content -Path $logPath -Value "[$(Get-Date)] folderName is ($folderName)."
 
 
 #### システム設定
